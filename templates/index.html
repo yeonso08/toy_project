@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+
+<title>유기견</title>
+  <script>
+    $(document).ready(function () {
+      show();
+    });
+
+    function show() {
+      $.ajax({
+        type: 'GET',
+        url: '/pets',
+        data: {},
+        success: function (response) {
+        }
+      });
+    }
+
+    function send() {
+      let name = $('#name').val()
+      let age = $('#age').val()
+      let phone_number = $('#phone_number').val()
+      let address = $('#address').val()
+      let reason = $('#reason').val()
+
+
+      $.ajax({
+        type: 'POST',
+        url: '/pets',
+        data: {name_give:name, age_give:age,phone_number_give:phone_number,address_give:address,reason_give:reason},
+        success: function (response) {
+          alert(response['msg'])
+          window.location.reload()
+        }
+      });
+    }
+  </script>
+  <script>
+    function next() {
+      location.href = 'index2.html';
+    }
+  </script>
+</head>
+
+<body>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">입양하기</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">입양 신청서</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">이름:</label>
+            <input type="text" class="form-control" id="name">
+          </div>
+            <div class="mb-3">
+            <label for="recipient-age" class="col-form-label">나이:</label>
+            <input type="text" class="form-control" id="age">
+          </div>
+            <div class="mb-3">
+            <label for="recipient-phone_number class="col-form-label">연락처:</label>
+            <input type="text" class="form-control" id="phone_number">
+          </div>
+            <div class="mb-3">
+            <label for="message-address" class="col-form-label">집 주소:</label>
+            <textarea class="form-control" id="address"></textarea>
+          </div>
+            <div class="mb-3">
+            <label for="recipient-reason" class="col-form-label">:입양을 원하는 이유는 무엇인가요?</label>
+            <textarea  type="text" class="form-control" id="reason"></textarea>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button onclick="close()" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button onclick="send()" class="btn btn-primary">저장하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="btn-group">
+  <button onclick="next()" class="btn btn-primary active" aria-current="page">상세정보</button>
+</div>
+</body>
+
+</html>
